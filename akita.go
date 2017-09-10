@@ -332,6 +332,9 @@ func (a *Akita) DefaultHTTPErrorHandler(err error, ctx Context) {
 		msg = Map{"message": msg}
 	}
 
+	e.Logger.Error(err)
+
+	// Send response
 	if !ctx.Response().Committed {
 		if ctx.Request().Method == HEAD { // Issue #608
 			err = ctx.NoContent(code)
@@ -342,8 +345,6 @@ func (a *Akita) DefaultHTTPErrorHandler(err error, ctx Context) {
 			a.Logger.Error(err)
 		}
 	}
-
-	a.Logger.Error(err)
 }
 
 // Pre adds middleware to the chain which is run before router.
