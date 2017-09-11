@@ -332,7 +332,7 @@ func (a *Akita) DefaultHTTPErrorHandler(err error, ctx Context) {
 		msg = Map{"message": msg}
 	}
 
-	e.Logger.Error(err)
+	a.Logger.Error(err)
 
 	// Send response
 	if !ctx.Response().Committed {
